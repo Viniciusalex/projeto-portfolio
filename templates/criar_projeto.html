@@ -1,0 +1,98 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projetos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/reset.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    <div class="pagina-inicial">
+        <header class="cabecalho">
+            <img src="/static/img/logo/iconelogo.png" alt="Logo My projetcs" />
+            <div class="cabecalho__busca">
+                <form action="{% url 'buscar">
+                    <div class="busca__fundo">
+                        <input class="busca__input" type="text" name="buscar" placeholder="O que você procura?">
+                        <img class="busca__icone" src="/static/img/ícones/1x/search.png" alt="ícone de search">
+                    </div>
+                </form>
+            </div>
+        </header>
+        <main class="principal">
+            <section class="menu-lateral">
+                <nav class="menu-lateral__navegacao">
+                    <a href="{% url 'index' %}"><img src="/static/img/ícones/1x/Home - ativo.png"> Home</a>
+                    <a href="#"><img src="/static/img/ícones/1x/Mais vistas - inativo.png"> Mais vistas</a>
+                </nav>
+            </section>
+            <div class="formulario">
+                <h2 class="cards__titulo">Adicionar projeto:</h2>
+                <form action="{% url 'criar_projeto' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="campo">
+                        <label for="file"><b>*Nome do projeto</b></label>
+                        <input type="text" name="nome_projeto" name="nome_projeto" required>
+                    </div>
+                    <div class="campo">
+                        <label for="file"><b>*Linguagem usada</b></label>
+                        <input type="text" name="linguagem_usada" id="linguagem_usada" required>
+                    </div>
+
+                    <div class="campo">
+                        <br>
+                        <label for="file"><b>*Descriçao:</b></label>
+                        <textarea rows="6" style="width: 26em" id="descricao" name="descricao" required></textarea>
+                    </div>
+
+                    <!-- Campo de senioridade com 3 opções para escolha (select option) e css de classe "campo" -->
+                    <div class="campo">
+                        <label for="file"><b>*Categoria</b></label>
+                        <input type="text" name="categoria" id="categoria" required>
+                    </div>
+                    <div class="campo">
+                        <label for="file"><b>*Tempo levado (dias)</b></label>
+                        <input type="number" name="tempo" id="tempo" required>
+                    </div>
+                    <div class="campo">
+                        <label for="file"><b>*Foto</b></label>
+                        <input type="file" name="foto_projeto" id="foto_projeto" required>
+                    </div>
+                    <div class="campo">
+                        <label for="file"><b>*Postar?</b></label>
+                        <input type="checkbox" name="projeto_publicado" id="projeto_publicado" required>
+                    </div>
+                    <div class="campo">
+                        <button class="botao" type="submit" onsubmit="">Adicionar</button>       
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+        <footer class="rodape">
+            <div class="rodape__icones">
+                <a href="https://linkedin.com" target=”_blank”>
+                    <img src="/static/img/ícones/1x/linkedin.png" alt="ícone linkedin">
+                </a>
+                <a href="https://www.instagram.com" target=”_blank”>
+                    <img src="/static/img/ícones/1x/instagram.png" alt="ícone instagram">
+                </a>
+                <a href="https://www.github.com" target=”_blank”>
+                    <img src="/static/img/ícones/1x/github.png" alt="ícone github">
+                </a>
+            </div>
+            <p class="rodape__texto">Desenvolvido por Vinícius Alexandre</p>
+        </footer>
+</body>
+
+</html>

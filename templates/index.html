@@ -1,0 +1,108 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projetos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <div class="pagina-inicial">
+        <header class="cabecalho">
+            <img src="{% static 'img/logo/iconelogo.png' %}" alt="Logo My projetcs" />
+            <div class="cabecalho__busca">
+                <form action="{% url 'buscar' %}">
+                    <div class="busca__fundo">
+                        <input class="busca__input" type="text" name="buscar" placeholder="O que você procura?">
+                        <img class="busca__icone" src="{% static 'img/ícones/1x/search.png' %}" alt="ícone de search">
+                    </div>
+                </form>
+            </div>
+        </header>
+        <main class="principal">
+            <section class="menu-lateral">
+                <nav class="menu-lateral__navegacao">
+                    <a href="#"><img src="{% static 'img/ícones/1x/Home - ativo.png' %}"> Home</a>
+                    <a href="#"><img src="{% static 'img/ícones/1x/Mais vistas - inativo.png' %}"> Mais vistas</a>
+                    <a href="{% url 'criar_projeto' %}"><img src="{% static 'img/ícones/1x/Novas - inativo.png' %}">Adicionar projeto</a>
+                </nav>
+            </section>
+            <section class="conteudo">
+                <section class="banner">
+                    <img class="banner__imagem" src="{% static 'img/logo/logo.png' %}" alt="banner meu projects">
+                    <h1 class="banner__titulo"></h1>
+                </section>
+                <section class="tags">
+                    <p class="tags__titulo">Busque por tags:</p>
+                    <ul class="tags__lista">
+                        <li class="tags__tag">Sites</li>
+                        <li class="tags__tag">Sistemas</li>
+                        <li class="tags__tag">Banco de dados</li>
+                        <li class="tags__tag">etc</li>
+                    </ul>
+                </section>
+                <section class="galeria">
+                    <div class="cards">
+                        <h2 class="cards__titulo">Navegue pelos projetos:</h2>
+                        <ul class="cards__lista">
+                            <!-- se eu tiver algum projeto vou mostrar-->
+                            {% if projetos %}
+                            <!-- e se eu tiver projeto vou mostrar ele na minha lista -->
+                            {% for projeto in projetos %}
+                            <li class="card">
+                                <a href="{% url 'projeto' projeto.id %}">
+                                    {% if projeto.foto_projeto == '' %}
+                                    <!-- se nao tiver uma foto no meu conteudo vou mostrar essa padrao -->
+                                    <img class="card__imagem" src="{% static 'img/imgprojetos/projeto.png' %}"
+                                        alt="foto">
+                                    {% else %}
+                                    <!-- caso eu tenha vou mostrar a que vou escolhida -->
+                                    <img class="card__imagem" src="{{ projeto.foto_projeto.url }}" alt="foto">
+                                </a>
+                                {% endif %}
+                                <span class="card__tag">projeto</span>
+                                <div class="card__info">
+                                    <p class="card__titulo">{{ projeto.nome_projeto }}</p>
+                                    <div class="card__texto">
+                                        <p class="card__descricao">{{ projeto.linguagem_usada }}</p>
+                                        <span>
+                                            <img src="{% static 'img/ícones/1x/favorite_outline.png' %}" alt="ícone de coração">
+                                        </span>
+                                    </div>
+                                </div>
+                            </li>
+                            {% endfor %}
+                            {% else %}
+                            {% endif %}
+                        </ul>
+                    </div>
+                </section>
+            </section>
+        </main>
+    </div>
+    <footer class="rodape">
+        <div class="rodape__icones">
+            <a href="https://www.linkedin.com/in/vin%C3%ADcius-alexandre-fernandes/" target=”_blank”>
+                <img src="{% static 'img/ícones/1x/linkedin.png' %}" alt="ícone linkedin">
+            </a>
+            <a href="https://www.instagram.com/vini.alex_/" target=”_blank”>
+                <img src="{% static 'img/ícones/1x/instagram.png' %}" alt="ícone instagram">
+            </a>
+            <a href="https://github.com/Viniciusalex" target=”_blank”>
+                <img src="{% static 'img/ícones/1x/github.png' %}" alt="ícone github">
+            </a>
+        </div>
+        <p class="rodape__texto">Desenvolvido por Vinícius Alexandre</p>
+    </footer>
+</body>
+
+</html>
